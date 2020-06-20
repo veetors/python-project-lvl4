@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "veetors_task_manager"
+version = "0.0.1"
+description = "task manager"
+authors = ["veetors <veetor.s@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/veetors/task-manager"
+readme = "README.md"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Natural Language :: English",
+  "Programming Language :: Python"
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+wemake-python-styleguide = "^0.14.0"
+pytest = "^5.4.2"
+pytest-cov = "^2.8.1"
+requests_mock = "^1.8.0"
+pytest-watch = "^4.2.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
