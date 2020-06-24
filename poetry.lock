@@ -56,7 +56,7 @@ six = ">=1.10.0"
 stevedore = ">=1.20.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
 name = "certifi"
 optional = false
@@ -64,7 +64,7 @@ python-versions = "*"
 version = "2020.4.5.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Universal encoding detector for Python 2 and 3"
 name = "chardet"
 optional = false
@@ -343,7 +343,7 @@ version = "3.1.3"
 gitdb = ">=4.0.1,<5"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "WSGI HTTP Server for UNIX"
 name = "gunicorn"
 optional = false
@@ -360,7 +360,7 @@ setproctitle = ["setproctitle"]
 tornado = ["tornado (>=0.2)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
 name = "idna"
 optional = false
@@ -581,6 +581,17 @@ watchdog = ">=0.6.0"
 
 [[package]]
 category = "main"
+description = "Add .env support to your django/flask apps in development and deployments"
+name = "python-dotenv"
+optional = false
+python-versions = "*"
+version = "0.13.0"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
+category = "main"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -596,7 +607,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "5.3.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python HTTP for Humans."
 name = "requests"
 optional = false
@@ -641,7 +652,19 @@ version = "1.3.1"
 docutils = ">=0.11,<1.0"
 
 [[package]]
-category = "dev"
+category = "main"
+description = "Easy and powerful exception tracking with Rollbar. Send messages and exceptions with arbitrary context, get back aggregates, and debug production issues quickly."
+name = "rollbar"
+optional = false
+python-versions = "*"
+version = "0.15.0"
+
+[package.dependencies]
+requests = ">=0.12.1"
+six = ">=1.9.0"
+
+[[package]]
+category = "main"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -713,7 +736,7 @@ python-versions = "*"
 version = "3.7.4.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
 optional = false
@@ -794,7 +817,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "ddb64b7b555be086feb8ef3b01cd0b9a13c46b96b4632f877a145f15f504b787"
+content-hash = "fe2074550c66b6d7ebdeff00704e37f6d6fbbc94207de14c3edd9a81667a01be"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -1019,6 +1042,10 @@ pytest-cov = [
 pytest-watch = [
     {file = "pytest-watch-4.2.0.tar.gz", hash = "sha256:06136f03d5b361718b8d0d234042f7b2f203910d8568f63df2f866b547b3d4b9"},
 ]
+python-dotenv = [
+    {file = "python-dotenv-0.13.0.tar.gz", hash = "sha256:3b9909bc96b0edc6b01586e1eed05e71174ef4e04c71da5786370cebea53ad74"},
+    {file = "python_dotenv-0.13.0-py2.py3-none-any.whl", hash = "sha256:25c0ff1a3e12f4bde8d592cc254ab075cfe734fc5dd989036716fd17ee7e5ec7"},
+]
 pytz = [
     {file = "pytz-2020.1-py2.py3-none-any.whl", hash = "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed"},
     {file = "pytz-2020.1.tar.gz", hash = "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"},
@@ -1046,6 +1073,9 @@ requests-mock = [
 ]
 restructuredtext-lint = [
     {file = "restructuredtext_lint-1.3.1.tar.gz", hash = "sha256:470e53b64817211a42805c3a104d2216f6f5834b22fe7adb637d1de4d6501fb8"},
+]
+rollbar = [
+    {file = "rollbar-0.15.0.tar.gz", hash = "sha256:75add43e634f3f75e069e1edd2b793b8d1e8800f16419a1d83065b49dd5d1372"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},
