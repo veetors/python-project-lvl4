@@ -25,7 +25,9 @@ SECRET_KEY = 'kp-f=k3t076bqbe#5oxo7yi!r8yl$)#jxig_l8vjo9fdy&ok*f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'veetors-task-manager.herokuapp.com',
+]
 
 
 # Application definition
