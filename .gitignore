@@ -10,3 +10,4 @@ __pycache__/
 *.pyc
 .coverage
 coverage.xml
+*.sqlite3
