@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from task_manager.forms import SignupForm
 from django.contrib import messages
+from django.shortcuts import redirect, render
+from task_manager.forms import SignupForm
 
 
 def home(request):
