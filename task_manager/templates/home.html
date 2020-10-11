@@ -2,10 +2,38 @@
 
 {% block content %}
     <div class="container mt-3">
-        {% if user.is_authenticated %}
-            <h1 class="h2">Hello {{ user.username }}</h1>
-        {% else %}
+        {% if not user.is_authenticated %}
             <h1 class="h2">Hello visitor</h1>
+        {% else %}
+            <h1 class="h2 mb-3">Tasks</h1>
+
+            {% for task in tasks %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div class="d-flex d-flex align-items-center justify-content-between h4 mb-3">
+                            <div class="badge badge-secondary mr-4">{{ task.status }}</div>
+                            <!-- <div class="h6 mb-0">
+                                <span class="badge badge-info"></span>
+                            </div> -->
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="h5 font-weight-normal mr-3 mb-0">
+                                Created by <span class="font-weight-bold">{{ task.creator }}</span>
+                            </span>
+                            <span class="h5 font-weight-normal mb-0">
+                                Assignee <span class="font-weight-bold">{{ task.assigned_to }}</span>
+                            </span>
+                            <a href="#" class="btn btn-outline-primary btn-sm ml-auto" role="button" aria-pressed="true">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title h3">{{ task.name }}</h2>
+                        {% if task.description %}
+                            <p class="card-text">{{ task.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
     </div>
 {% endblock %}

@@ -1,10 +1,15 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from task_manager.forms import SignupForm
+from task_manager.models import Task
 
 
 def home(request):
-    return render(request, 'home.html')
+    tasks = Task.objects.all()
+
+    return render(request, 'home.html', context={
+        'tasks': tasks,
+    })
 
 
 def signup(request):
