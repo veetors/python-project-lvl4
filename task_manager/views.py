@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from task_manager.forms import SignupForm, TaskForm
 from task_manager.models import Task
 
@@ -27,6 +27,7 @@ class UserCreate(SuccessMessageMixin, CreateView):
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
+    template_name_suffix = '_create_form'
     success_url = reverse_lazy('home')
 
     def get_initial(self):
@@ -35,3 +36,11 @@ class TaskCreate(LoginRequiredMixin, CreateView):
             'creator': user,
             'assigned_to': user,
         }
+
+
+class TaskUpdate(LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name_suffix = '_update_form'
+    pk_url_kwarg = 'task_id'
+    success_url = reverse_lazy('home')

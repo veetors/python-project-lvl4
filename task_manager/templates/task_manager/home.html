@@ -25,7 +25,7 @@
                             <span>
                                 Assignee <span class="font-weight-bold">{{ task.assigned_to }}</span>
                             </span>
-                            <a href="#" class="btn btn-outline-primary btn-sm ml-auto" role="button" aria-pressed="true">Edit</a>
+                            <a href="{% url 'task_update' task_id=task.id %}" class="btn btn-outline-primary btn-sm ml-auto" role="button" aria-pressed="true">Edit</a>
                         </div>
                     </div>
                     <div class="card-body">

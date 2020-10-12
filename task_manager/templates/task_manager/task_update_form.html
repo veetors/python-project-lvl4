@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h1 class="h2">Update task</h1>
+        <form action="{% url 'task_update' task.id %}" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form_errors form type='non_fields' %}
+            {% bootstrap_field form.name placeholder='Enter task title' %}
+            {% bootstrap_field form.description placeholder='Enter task description' %}
+            {% bootstrap_field form.creator %}
+            {% bootstrap_field form.assigned_to %}
+            <button class="btn btn-primary" type="submit">Update task</button>
+        </form>
+    </div>
+{% endblock %}
