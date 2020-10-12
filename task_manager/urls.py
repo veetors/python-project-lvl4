@@ -19,8 +19,8 @@ from task_manager import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('signup/', views.signup, name='signup'),
+    path('signup/', views.UserCreate.as_view(), name='signup'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('tasks/new', views.new_task, name='new_task'),
+    path('tasks/new', views.TaskCreate.as_view(), name='new_task'),
     path('admin/', admin.site.urls),
 ]

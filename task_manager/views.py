@@ -1,6 +1,9 @@
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 from task_manager.forms import SignupForm, TaskForm
 from task_manager.models import Task
 
@@ -8,43 +11,27 @@ from task_manager.models import Task
 def home(request):
     tasks = Task.objects.all()
 
-    return render(request, 'home.html', context={
+    return render(request, 'task_manager/home.html', context={
         'tasks': tasks,
     })
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(
-                request,
-                'Account was created for {0}'.format(username),
-            )
-            return redirect('home')
-    else:
-        form = SignupForm()
-    return render(request, 'signup.html', context={
-        'form': form,
-    })
+class UserCreate(SuccessMessageMixin, CreateView):
+    model = User
+    form_class = SignupForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('home')
+    success_message = 'Account was created for %(username)s'
 
 
-@login_required
-def new_task(request):
-    if request.method == 'POST':
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        current_user = request.user
-        form = TaskForm(initial={
-            'creator': current_user,
-            'assigned_to': current_user,
-        })
+class TaskCreate(LoginRequiredMixin, CreateView):
+    model = Task
+    form_class = TaskForm
+    success_url = reverse_lazy('home')
 
-    return render(request, 'new_task.html', context={
-        'form': form,
-    })
+    def get_initial(self):
+        user = self.request.user
+        return {
+            'creator': user,
+            'assigned_to': user,
+        }
