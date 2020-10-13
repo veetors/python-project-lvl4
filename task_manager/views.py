@@ -3,7 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 from task_manager.forms import SignupForm, TaskForm
 from task_manager.models import Task
 
@@ -24,6 +26,14 @@ class UserCreate(SuccessMessageMixin, CreateView):
     success_message = 'Account was created for %(username)s'
 
 
+class TasksList(LoginRequiredMixin, ListView):
+    model = Task
+
+
+class TaskDetail(LoginRequiredMixin, DetailView):
+    model = Task
+
+
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
@@ -42,5 +52,9 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name_suffix = '_update_form'
-    pk_url_kwarg = 'task_id'
+    success_url = reverse_lazy('home')
+
+
+class TaskDelete(LoginRequiredMixin, DeleteView):
+    model = Task
     success_url = reverse_lazy('home')
