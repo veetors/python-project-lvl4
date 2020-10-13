@@ -19,20 +19,37 @@ from task_manager import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+
     path('signup/', views.UserCreate.as_view(), name='signup'),
+
     path('accounts/', include('django.contrib.auth.urls')),
-    path('tasks', views.TasksList.as_view(), name='task_list'),
-    path('tasks/new', views.TaskCreate.as_view(), name='task_new'),
-    path('tasks/<int:pk>', views.TaskDetail.as_view(), name='task_detail'),
+
+    path('tasks/', views.TasksList.as_view(), name='task_list'),
+    path('tasks/new/', views.TaskCreate.as_view(), name='task_new'),
+    path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
     path(
-        'tasks/<int:pk>/update',
+        'tasks/<int:pk>/update/',
         views.TaskUpdate.as_view(),
         name='task_update',
     ),
     path(
-        'tasks/<int:pk>/delete',
+        'tasks/<int:pk>/delete/',
         views.TaskDelete.as_view(),
         name='task_delete',
     ),
+
+    path('statuses/', views.StatusList.as_view(), name='status_list'),
+    path('statuses/new/', views.StatusCreate.as_view(), name='status_new'),
+    path(
+        'statuses/<int:pk>/update/',
+        views.StatusUpdate.as_view(),
+        name='status_update',
+    ),
+    path(
+        'statuses/<int:pk>/delete/',
+        views.StatusDelete.as_view(),
+        name='status_delete',
+    ),
+
     path('admin/', admin.site.urls),
 ]

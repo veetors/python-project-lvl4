@@ -9,6 +9,7 @@
             {% bootstrap_form_errors form type='non_fields' %}
             {% bootstrap_field form.name placeholder='Enter task title' %}
             {% bootstrap_field form.description placeholder='Enter task description' %}
+            {% bootstrap_field form.status placeholder='Enter task status' %}
             {% bootstrap_field form.creator %}
             {% bootstrap_field form.assigned_to %}
             <button class="btn btn-primary" type="submit">Add task</button>

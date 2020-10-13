@@ -24,11 +24,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav w-100">
+                    <ul class="navbar-nav w-100 d-flex">
                         {% if user.is_authenticated %}
-                            <li class="nav-item mr-auto">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{% url 'task_list' %}">
                                     Tasks
+                                </a>
+                            </li>
+                            <li class="nav-item mr-auto">
+                                <a class="nav-link" href="{% url 'status_list' %}">
+                                    Statuses
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
@@ -40,7 +45,7 @@
                                 </div>
                             </li>
                         {% else %}
-                            <li class="nav-item">
+                            <li class="nav-item ml-auto">
                                 <a class="btn btn-outline-primary" href="{% url 'signup' %}">Create account</a>
                             </li>
                             <li class="nav-item">

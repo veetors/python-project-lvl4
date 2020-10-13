@@ -3,12 +3,13 @@
 
 {% block content %}
     <div class="container mt-3">
-        <h1 class="h2">Update {{ task.name }}</h1>
+        <h1 class="h2">Edit {{ object }}</h1>
         <form method="POST">
             {% csrf_token %}
             {% bootstrap_form_errors form type='non_fields' %}
             {% bootstrap_field form.name placeholder='Enter task title' %}
             {% bootstrap_field form.description placeholder='Enter task description' %}
+            {% bootstrap_field form.status %}
             {% bootstrap_field form.creator %}
             {% bootstrap_field form.assigned_to %}
             <button class="btn btn-primary" type="submit">Update task</button>

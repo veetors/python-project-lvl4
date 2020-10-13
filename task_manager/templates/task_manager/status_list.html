@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="h2 mb-0">Statuses</h1>
+            <a href="{% url 'status_new' %}" class="btn btn-outline-primary">Add new status</a>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in object_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ status.name }}</td>
+                        <td class="text-right">
+                            <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'status_update' status.id %}">
+                                Edit
+                            </a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'status_delete' status.id %}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

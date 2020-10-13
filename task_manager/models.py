@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-DEFAULT_STATUS_ID = 1
-
 
 class TaskStatus(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -17,8 +15,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     status = models.ForeignKey(
         TaskStatus,
-        default=DEFAULT_STATUS_ID,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
     )
     creator = models.ForeignKey(
         User,
@@ -28,7 +25,8 @@ class Task(models.Model):
     assigned_to = models.ForeignKey(
         User,
         related_name='assignet_to',
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
