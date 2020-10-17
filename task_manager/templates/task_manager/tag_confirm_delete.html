@@ -6,10 +6,10 @@
         <form method="POST">
             {% csrf_token %}
             <p>Are you sure you want to delete "{{ object }}"?</p>
-            <a class="btn btn-secondary text-white mr-2" href="{% url 'status_list' %}">
+            <a class="btn btn-secondary text-white mr-2" href="{% url 'tag_list' %}">
                 Cancel
             </a>
-            <button class="btn btn-danger" type="submit">Delete status</button>
+            <button class="btn btn-danger" type="submit">Delete tag</button>
         </form>
     </div>
 {% endblock %}

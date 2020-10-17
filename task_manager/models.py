@@ -2,6 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
 class TaskStatus(models.Model):
     name = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,6 +36,9 @@ class Task(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+
+    tags = models.ManyToManyField(Tag, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

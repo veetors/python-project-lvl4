@@ -51,5 +51,10 @@ urlpatterns = [
         name='status_delete',
     ),
 
+    path('tags/', views.TagList.as_view(), name='tag_list'),
+    path('tags/new/', views.TagCreate.as_view(), name='tag_new'),
+    path('tags/<int:pk>/update/', views.TagUpdate.as_view(), name='tag_update'),
+    path('tags/<int:pk>/delete/', views.TagDelete.as_view(), name='tag_delete'),
+
     path('admin/', admin.site.urls),
 ]

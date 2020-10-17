@@ -9,7 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from task_manager.forms import SignupForm, TaskForm
-from task_manager.models import Task, TaskStatus
+from task_manager.models import Tag, Task, TaskStatus
 
 
 def home(request):
@@ -98,8 +98,34 @@ class StatusDelete(LoginRequiredMixin, DeleteView):
                 request,
                 messages.ERROR,
                 (
-                    'Status "{0}" can\'t be deleted, because it is used in some task.'
+                    'Status "{0}" can\'t be deleted, '
+                    'because it is used in some task.'
                 ).format(self.object.name),
             )
             return redirect(self.error_url)
         return redirect(self.success_url)
+
+
+class TagList(LoginRequiredMixin, ListView):
+    model = Tag
+    template_name = 'task_manager/tag_list.html'
+
+
+class TagCreate(LoginRequiredMixin, CreateView):
+    model = Tag
+    fields = ['name']
+    template_name = 'task_manager/tag_create_form.html'
+    success_url = reverse_lazy('tag_list')
+
+
+class TagUpdate(LoginRequiredMixin, UpdateView):
+    model = Tag
+    fields = ['name']
+    template_name = 'task_manager/tag_update_form.html'
+    success_url = reverse_lazy('tag_list')
+
+
+class TagDelete(LoginRequiredMixin, DeleteView):
+    model = Tag
+    template_name = 'task_manager/tag_confirm_delete.html'
+    success_url = reverse_lazy('tag_list')

@@ -18,5 +18,14 @@ class TaskForm(ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'status', 'description', 'creator', 'assigned_to']
-        widgets = {'creator': HiddenInput()}
+        fields = [
+            'name',
+            'status',
+            'description',
+            'creator',
+            'assigned_to',
+            'tags',
+        ]
+        widgets = {
+            'creator': HiddenInput(),
+        }
