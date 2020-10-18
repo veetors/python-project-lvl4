@@ -1,21 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
-
-class TaskStatus(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
+from task_manager.statuses.models import TaskStatus
+from task_manager.tags.models import Tag
 
 
 class Task(models.Model):

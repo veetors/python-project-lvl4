@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'task_manager/base.html' %}
 {% load bootstrap4 %}
 
 {% block content %}
@@ -7,8 +7,8 @@
         <form method="POST">
             {% csrf_token %}
             {% bootstrap_form_errors form type='non_fields' %}
-            {% bootstrap_field form.name placeholder='Enter tag name' %}
-            <button class="btn btn-primary" type="submit">Update tag</button>
+            {% bootstrap_field form.name placeholder='Enter status name' %}
+            <button class="btn btn-primary" type="submit">Update status</button>
         </form>
     </div>
 {% endblock %}

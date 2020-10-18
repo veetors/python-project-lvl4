@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'task_manager/base.html' %}
 
 {% block content %}
     <div class="container mt-3">
@@ -6,10 +6,10 @@
         <form method="POST">
             {% csrf_token %}
             <p>Are you sure you want to delete "{{ object }}"?</p>
-            <a class="btn btn-secondary text-white mr-2" href="{% url 'tag_list' %}">
+            <a class="btn btn-secondary text-white mr-2" href="{% url 'statuses:status_list' %}">
                 Cancel
             </a>
-            <button class="btn btn-danger" type="submit">Delete tag</button>
+            <button class="btn btn-danger" type="submit">Delete status</button>
         </form>
     </div>
 {% endblock %}

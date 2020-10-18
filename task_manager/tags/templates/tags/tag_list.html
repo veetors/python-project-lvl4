@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'task_manager/base.html' %}
 
 {% block content %}
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h2 mb-0">Statuses</h1>
-            <a href="{% url 'tag_new' %}" class="btn btn-outline-primary">Add new tag</a>
+            <a href="{% url 'tags:tag_new' %}" class="btn btn-outline-primary">Add new tag</a>
         </div>
         
         <table class="table">
@@ -21,10 +21,10 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ status.name }}</td>
                         <td class="text-right">
-                            <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'tag_update' status.id %}">
+                            <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'tags:tag_update' status.id %}">
                                 Edit
                             </a>
-                            <a class="btn btn-outline-danger btn-sm" href="{% url 'tag_delete' status.id %}">
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'tags:tag_delete' status.id %}">
                                 Delete
                             </a>
                         </td>
