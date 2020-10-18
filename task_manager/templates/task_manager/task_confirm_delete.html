@@ -6,7 +6,7 @@
         <form method="POST">
             {% csrf_token %}
             <p>Are you sure you want to delete "{{ object }}"?</p>
-            <a class="btn btn-secondary text-white mr-2" href="{% url 'tasks:task_detail' task.id %}">
+            <a class="btn btn-secondary text-white mr-2" href="{% url 'task_detail' task.id %}">
                 Cancel
             </a>
             <button class="btn btn-danger" type="submit">Delete task</button>

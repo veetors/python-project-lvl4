@@ -1,10 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-from task_manager.forms import SignupForm
-from task_manager.tasks.models import Task
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
+from task_manager.forms import SignupForm, TaskCreationForm, TaskForm
+from task_manager.models import Tag, Task
 
 
 def home(request):
@@ -19,5 +22,66 @@ class UserCreate(SuccessMessageMixin, CreateView):
     model = User
     form_class = SignupForm
     template_name = 'registration/signup.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('login')
     success_message = 'Account was created for %(username)s'
+
+
+# Tasks
+class TasksList(LoginRequiredMixin, ListView):
+    model = Task
+
+
+class TaskDetail(LoginRequiredMixin, DetailView):
+    model = Task
+
+
+class TaskCreate(LoginRequiredMixin, CreateView):
+    model = Task
+    form_class = TaskCreationForm
+    template_name_suffix = '_create_form'
+    success_url = reverse_lazy('task_list')
+
+    def get_initial(self):
+        user = self.request.user
+        return {
+            'creator': user,
+            'assigned_to': user,
+        }
+
+
+class TaskUpdate(LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name_suffix = '_update_form'
+
+    def get_success_url(self):
+        return reverse_lazy('task_detail', args=(self.object.id,))
+
+
+class TaskDelete(LoginRequiredMixin, DeleteView):
+    model = Task
+    success_url = reverse_lazy('task_list')
+
+
+# Tags
+class TagList(LoginRequiredMixin, ListView):
+    model = Tag
+
+
+class TagCreate(LoginRequiredMixin, CreateView):
+    model = Tag
+    fields = ['name']
+    template_name_suffix = '_create_form'
+    success_url = reverse_lazy('tag_list')
+
+
+class TagUpdate(LoginRequiredMixin, UpdateView):
+    model = Tag
+    fields = ['name']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('tag_list')
+
+
+class TagDelete(LoginRequiredMixin, DeleteView):
+    model = Tag
+    success_url = reverse_lazy('tag_list')

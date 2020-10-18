@@ -22,8 +22,8 @@
                 <span>
                     Assignee <span class="font-weight-bold">{{ object.assigned_to }}</span>
                 </span>
-                <a href="{% url 'tasks:task_update' task.id %}" class="btn btn-outline-primary btn-sm ml-auto mr-2" role="button" aria-pressed="true">Edit</a>
-                <a href="{% url 'tasks:task_delete' task.id %}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">Delete</a>
+                <a href="{% url 'task_update' task.id %}" class="btn btn-outline-primary btn-sm ml-auto mr-2" role="button" aria-pressed="true">Edit</a>
+                <a href="{% url 'task_delete' task.id %}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">Delete</a>
             </div>
         </div>
 

@@ -10,7 +10,7 @@
             {% bootstrap_field form.name placeholder='Enter task title' %}
             {% bootstrap_field form.description placeholder='Enter task description' %}
             {% bootstrap_field form.status placeholder='Enter task status' %}
-            {% bootstrap_field form.creator %}
+            {% bootstrap_field form.creator show_label=False %}
             {% bootstrap_field form.assigned_to %}
             {% bootstrap_field form.tags %}
             <button class="btn btn-primary" type="submit">Add task</button>

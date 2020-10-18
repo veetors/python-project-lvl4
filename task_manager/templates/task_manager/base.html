@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Task manager</title>{% endblock %}
 </head>
-<body>
+<body class="mb-4">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container d-flex">
@@ -27,17 +27,12 @@
                     <ul class="navbar-nav w-100 d-flex">
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'tasks:task_list' %}">
+                                <a class="nav-link" href="{% url 'task_list' %}">
                                     Tasks
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'statuses:status_list' %}">
-                                    Statuses
-                                </a>
-                            </li>
                             <li class="nav-item mr-auto">
-                                <a class="nav-link" href="{% url 'tags:tag_list' %}">
+                                <a class="nav-link" href="{% url 'tag_list' %}">
                                     Tags
                                 </a>
                             </li>

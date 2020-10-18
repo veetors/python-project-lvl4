@@ -1,7 +1,23 @@
 from django.contrib.auth.models import User
 from django.db import models
-from task_manager.statuses.models import TaskStatus
-from task_manager.tags.models import Tag
+
+DEFAULT_STATUS_ID = 1
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class TaskStatus(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
@@ -9,6 +25,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     status = models.ForeignKey(
         TaskStatus,
+        default=DEFAULT_STATUS_ID,
         on_delete=models.RESTRICT,
     )
     creator = models.ForeignKey(

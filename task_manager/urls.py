@@ -20,9 +20,27 @@ from task_manager import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('signup/', views.UserCreate.as_view(), name='signup'),
+
     path('accounts/', include('django.contrib.auth.urls')),
-    path('tasks/', include('task_manager.tasks.urls')),
-    path('statuses/', include('task_manager.statuses.urls')),
-    path('tags/', include('task_manager.tags.urls')),
+
+    path('tasks/', views.TasksList.as_view(), name='task_list'),
+    path('tasks/new/', views.TaskCreate.as_view(), name='task_new'),
+    path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
+    path(
+        'tasks/<int:pk>/update/',
+        views.TaskUpdate.as_view(),
+        name='task_update',
+    ),
+    path(
+        'tasks/<int:pk>/delete/',
+        views.TaskDelete.as_view(),
+        name='task_delete',
+    ),
+
+    path('tags/', views.TagList.as_view(), name='tag_list'),
+    path('tags/new/', views.TagCreate.as_view(), name='tag_new'),
+    path('tags/<int:pk>/update/', views.TagUpdate.as_view(), name='tag_update'),
+    path('tags/<int:pk>/delete/', views.TagDelete.as_view(), name='tag_delete'),
+
     path('admin/', admin.site.urls),
 ]
