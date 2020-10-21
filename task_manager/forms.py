@@ -17,6 +17,13 @@ class TaskForm(ModelForm):
         self.fields['description'].label = 'Task description'
         self.fields['creator'].disabled = True
 
+        for field in ('status', 'creator', 'assigned_to', 'tags'):
+            self.fields[field].widget.attrs['class'] = 'selectpicker'
+
+        self.fields['tags'].widget.attrs.update({
+            'title': 'Choose one of the following tags',
+        })
+
     class Meta:
         model = Task
         fields = [
@@ -32,5 +39,4 @@ class TaskForm(ModelForm):
 class TaskCreationForm(TaskForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['creator'].widget.attrs.update({'hidden': True})
         self.fields['status'].disabled = True
