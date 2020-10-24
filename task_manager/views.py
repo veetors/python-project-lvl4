@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from task_manager.filters import TaskFilter, UserTaskFilter
 from task_manager.forms import SignupForm, TaskCreationForm, TaskForm
 from task_manager.models import Tag, Task
 
@@ -27,8 +28,14 @@ class UserCreate(SuccessMessageMixin, CreateView):
 
 
 # Tasks
-class TasksList(LoginRequiredMixin, ListView):
+class TaskList(LoginRequiredMixin, ListView):
     model = Task
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task_filter = TaskFilter(self.request.GET)
+        context['task_filter'] = task_filter
+        return context
 
 
 class TaskDetail(LoginRequiredMixin, DetailView):
@@ -61,6 +68,14 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('task_list')
+
+
+class UserTaskList(TaskList):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task_filter = UserTaskFilter(self.request.user, self.request.GET)
+        context['task_filter'] = task_filter
+        return context
 
 
 # Tags

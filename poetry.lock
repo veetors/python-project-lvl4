@@ -119,6 +119,17 @@ version = ">=1.5.0,<2.0.0"
 docs = ["sphinx (>=2.4,<3.0)", "sphinx_rtd_theme (>=0.4.3,<0.5.0)", "m2r (>=0.2.1,<0.3.0)"]
 
 [[package]]
+category = "main"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+name = "django-filter"
+optional = false
+python-versions = ">=3.5"
+version = "2.4.0"
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 category = "dev"
 description = "Pythonic argument parser, that will make you smile"
 name = "docopt"
@@ -503,7 +514,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "ebcff8d162bc0c0a4a57f819d14576d7057ad98528f2d7b606514fdcf14fab18"
+content-hash = "222d905c81f271e16e8fb32c85aa9c5a0a22ee091c96756d14cfd2b753981970"
 lock-version = "1.0"
 python-versions = "^3.6"
 
@@ -577,6 +588,10 @@ django = [
 django-bootstrap4 = [
     {file = "django-bootstrap4-2.2.0.tar.gz", hash = "sha256:1c0a931b4245a0dcd5051ea1b244ac130a328374ce8e85254c75eb072a737201"},
     {file = "django_bootstrap4-2.2.0-py3-none-any.whl", hash = "sha256:32cc0f914ace4cef935c0d3f786dde2a52f0ea1be72153f6e356c0aa8f3925e1"},
+]
+django-filter = [
+    {file = "django-filter-2.4.0.tar.gz", hash = "sha256:84e9d5bb93f237e451db814ed422a3a625751cbc9968b484ecc74964a8696b06"},
+    {file = "django_filter-2.4.0-py3-none-any.whl", hash = "sha256:e00d32cebdb3d54273c48f4f878f898dced8d5dfaad009438fe61ebdf535ace1"},
 ]
 docopt = [
     {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
