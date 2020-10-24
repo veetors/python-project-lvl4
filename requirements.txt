@@ -4,3 +4,4 @@ django-heroku
 rollbar
 python-dotenv
 django-bootstrap4
+django-filter
