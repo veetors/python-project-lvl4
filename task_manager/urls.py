@@ -18,7 +18,7 @@ from django.urls import include, path
 from task_manager import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.Home.as_view(), name='home'),
     path('signup/', views.UserCreate.as_view(), name='signup'),
 
     path('accounts/', include('django.contrib.auth.urls')),

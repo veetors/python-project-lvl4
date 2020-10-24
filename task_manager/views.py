@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -11,12 +12,11 @@ from task_manager.forms import SignupForm, TaskCreationForm, TaskForm
 from task_manager.models import Tag, Task
 
 
-def home(request):
-    tasks = Task.objects.all()
-
-    return render(request, 'task_manager/home.html', context={
-        'tasks': tasks,
-    })
+class Home(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('task_list'))
+        return redirect(reverse_lazy('login'))
 
 
 class UserCreate(SuccessMessageMixin, CreateView):
