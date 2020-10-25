@@ -54,6 +54,7 @@
                                     {{ user.username }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'user_edit' user.id %}">Edit profile</a>
                                     <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                                 </div>
                             </li>

@@ -22,7 +22,7 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ tag.name }}</td>
                             <td class="text-right">
-                                <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'tag_update' tag.id %}">
+                                <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'tag_edit' tag.id %}">
                                     Edit
                                 </a>
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'tag_delete' tag.id %}">

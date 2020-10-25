@@ -23,13 +23,19 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),
 
+    path(
+        'users/<int:pk>/edit/',
+        views.UserUpdate.as_view(),
+        name='user_edit',
+    ),
+
     path('tasks/', views.TaskList.as_view(), name='task_list'),
     path('tasks/new/', views.TaskCreate.as_view(), name='task_new'),
     path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
     path(
-        'tasks/<int:pk>/update/',
+        'tasks/<int:pk>/edit/',
         views.TaskUpdate.as_view(),
-        name='task_update',
+        name='task_edit',
     ),
     path(
         'tasks/<int:pk>/delete/',
@@ -40,7 +46,7 @@ urlpatterns = [
 
     path('tags/', views.TagList.as_view(), name='tag_list'),
     path('tags/new/', views.TagCreate.as_view(), name='tag_new'),
-    path('tags/<int:pk>/update/', views.TagUpdate.as_view(), name='tag_update'),
+    path('tags/<int:pk>/edit/', views.TagUpdate.as_view(), name='tag_edit'),
     path('tags/<int:pk>/delete/', views.TagDelete.as_view(), name='tag_delete'),
 
     path('admin/', admin.site.urls),

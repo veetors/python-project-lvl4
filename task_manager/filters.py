@@ -13,6 +13,10 @@ class TaskFilter(FilterSet):
             if filter != 'tags':
                 filter_field.empty_label = 'Nothing selected'
 
+    @property
+    def qs(self):
+        return super().qs.order_by('-created_at')
+
     class Meta:
         model = Task
         fields = ('assigned_to', 'status', 'tags')
@@ -26,4 +30,4 @@ class UserTaskFilter(TaskFilter):
     @property
     def qs(self):
         parent_qs = super().qs
-        return parent_qs.filter(creator=self.user)
+        return parent_qs.filter(creator=self.user).order_by('-created_at')
