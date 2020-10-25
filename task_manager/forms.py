@@ -1,16 +1,16 @@
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth import forms as auth_forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from task_manager.models import Task
 
 
-class SignupForm(UserCreationForm):
+class SignupForm(auth_forms.UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class UserUpdateForm(UserChangeForm):
+class UserUpdateForm(auth_forms.UserChangeForm):
     class Meta:
         model = User
         fields = ['username', 'email']

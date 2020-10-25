@@ -28,6 +28,11 @@ urlpatterns = [
         views.UserUpdate.as_view(),
         name='user_edit',
     ),
+    path(
+        'users/<int:pk>/password/edit',
+        views.UserPasswordUpdate.as_view(),
+        name='user_password_edit',
+    ),
 
     path('tasks/', views.TaskList.as_view(), name='task_list'),
     path('tasks/new/', views.TaskCreate.as_view(), name='task_new'),

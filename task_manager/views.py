@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
@@ -25,6 +26,7 @@ class Home(View):
         return redirect(reverse_lazy('login'))
 
 
+# User
 class UserCreate(SuccessMessageMixin, CreateView):
     model = User
     form_class = SignupForm
@@ -39,6 +41,18 @@ class UserUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     template_name = 'registration/user_update_form.html'
     success_url = reverse_lazy('home')
     success_message = 'Profile was successfully updated'
+
+
+class UserPasswordUpdate(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    auth_views.PasswordChangeView,
+):
+    template_name = 'registration/user_password_update_form.html'
+    success_message = 'Password was successfully updated'
+
+    def get_success_url(self):
+        return reverse_lazy('user_edit', args=(self.request.user.id,))
 
 
 # Tasks
