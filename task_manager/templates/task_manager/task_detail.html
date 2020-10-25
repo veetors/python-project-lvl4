@@ -1,34 +1,43 @@
 {% extends 'task_manager/base.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="container mt-3">
-        <h1 class="h2 mb-3">{{ object.name }}</h1>
+        <h1 class="h2 mb-3">{% translate object.name %}</h1>
 
         <div class="jumbotron p-3">
             <div class="d-flex d-flex align-items-center justify-content-between h5 mb-2">
-                <div class="badge badge-secondary p-2">{{ object.status }}</div>
+                <div class="badge badge-secondary p-2">{% translate object.status.name %}</div>
                 {% if object.tags.all|length %}
                     <div class="h6 mb-0">
                         {% for tag in object.tags.all %}
-                            <span class="badge badge-info">{{ tag }}</span>
+                            <span class="badge badge-info">{% translate tag.name %}</span>
                         {% endfor %}
                     </div>
                 {% endif %}
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <span class="mr-3">
-                    Created by <span class="font-weight-bold">{{ object.creator }}</span>
+                    {% translate 'Created by' %}
+                    <span class="font-weight-bold">{% translate object.creator.username %}</span>
                 </span>
                 <span>
-                    Assignee <span class="font-weight-bold">{{ object.assigned_to }}</span>
+                    {% translate 'Assigned to' %}
+                    <span class="font-weight-bold">
+                        {% translate object.assigned_to.username %}
+                    </span>
                 </span>
-                <a href="{% url 'task_edit' task.id %}" class="btn btn-outline-primary btn-sm ml-auto mr-2" role="button" aria-pressed="true">Edit</a>
-                <a href="{% url 'task_delete' task.id %}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">Delete</a>
+                <a href="{% url 'task_edit' task.id %}" class="btn btn-outline-primary btn-sm ml-auto mr-2" role="button" aria-pressed="true">
+                    {% translate 'Edit' %}
+                </a>
+                <a href="{% url 'task_delete' task.id %}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">
+                    {% translate 'Delete' %}
+                </a>
             </div>
         </div>
 
         {% if object.description %}
-            <p class="h5">{{ object.description }}</p>
+            <p class="h5">{% translate object.description %}</p>
         {% endif %}
     </div>
 {% endblock %}

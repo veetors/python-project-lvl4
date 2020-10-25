@@ -1,14 +1,22 @@
 {% extends 'task_manager/base.html' %}
+{% load i18n %}
 {% load bootstrap4 %}
 
 {% block content %}
+{% translate object.name as object_name %}
+{% translate 'Enter tag name' as name_placeholder %}
+
     <div class="container mt-3">
-        <h1 class="h2">Edit "{{ object }}"</h1>
+        <h1 class="h2">
+            {% blocktranslate %}Edit "{{ object_name }}"{% endblocktranslate %}
+        </h1>
         <form method="POST">
             {% csrf_token %}
             {% bootstrap_form_errors form type='non_fields' %}
-            {% bootstrap_field form.name placeholder='Enter tag name' %}
-            <button class="btn btn-primary" type="submit">Update tag</button>
+            {% bootstrap_field form.name placeholder=name_placeholder %}
+            <button class="btn btn-primary" type="submit">
+                {% translate 'Update tag' %}
+            </button>
         </form>
     </div>
 {% endblock %}

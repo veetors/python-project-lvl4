@@ -1,19 +1,25 @@
 {% extends 'task_manager/base.html' %}
+{% load i18n %}
 {% load bootstrap4 %}
 
 {% block content %}
+{% translate 'Enter task title' as name_placeholder %}
+{% translate 'Enter task description' as description_placeholder %}
+
     <div class="container mt-3">
-        <h1 class="h2">Add new task</h1>
+        <h1 class="h2">{% translate 'Add new task' %}</h1>
         <form method="POST">
             {% csrf_token %}
             {% bootstrap_form_errors form type='non_fields' %}
-            {% bootstrap_field form.name placeholder='Enter task title' %}
-            {% bootstrap_field form.description placeholder='Enter task description' %}
+            {% bootstrap_field form.name placeholder=name_placeholder %}
+            {% bootstrap_field form.description placeholder=description_placeholder %}
             {% bootstrap_field form.status form_group_class='form-group selectpicker-type-hidden' %}
             {% bootstrap_field form.creator form_group_class='form-group selectpicker-type-hidden' %}
             {% bootstrap_field form.assigned_to %}
             {% bootstrap_field form.tags %}
-            <button class="btn btn-primary" type="submit">Add task</button>
+            <button class="btn btn-primary" type="submit">
+                {% translate 'Add task' %}
+            </button>
         </form>
     </div>
 {% endblock %}

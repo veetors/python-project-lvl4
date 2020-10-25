@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +14,17 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Task manager</title>{% endblock %}
+    <title>{% block title %}
+        {% translate 'Task manager' %}
+    {% endblock %}</title>
 </head>
 <body class="mb-4">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container d-flex">
-                <a class="navbar-brand" href="{% url 'home' %}">Task manager</a>
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    {% translate 'Task manager' %}
+                </a>
                 <button
                     class="navbar-toggler" 
                     type="button" 
@@ -35,38 +40,42 @@
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'task_list' %}">
-                                    All tasks
+                                    {% translate 'All tasks' %}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'user_task_list' %}">
-                                    My tasks
+                                    {% translate 'My tasks' %}
                                 </a>
                             </li>
                             <li class="nav-item mr-auto">
                                 <a class="nav-link" href="{% url 'tag_list' %}">
-                                    Tags
+                                    {% translate 'Tags' %}
                                 </a>
                             </li>
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ user.username }}
+                                    {% translate user.username %}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'user_edit' user.id %}">Edit profile</a>
-                                    <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                                    <a class="dropdown-item" href="{% url 'user_edit' user.id %}">
+                                        {% translate 'Edit profile' %}
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">
+                                        {% translate 'Log out' %}
+                                    </a>
                                 </div>
                             </li>
                         {% else %}
                             <li class="nav-item ml-auto">
                                 <a class="btn btn-outline-primary" href="{% url 'signup' %}">
-                                    Create account
+                                    {% translate 'Create account' %}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary ml-3" href="{% url 'login' %}">
-                                    Log in
+                                    {% translate 'Log in' %}
                                 </a>
                             </li>
                         {% endif %}

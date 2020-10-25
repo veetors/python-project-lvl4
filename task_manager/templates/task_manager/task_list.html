@@ -1,28 +1,39 @@
 {% extends 'task_manager/base.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h2 mb-0">Tasks</h1>
-            <a href="{% url 'task_new' %}" class="btn btn-outline-primary">Add new task</a>
+            <h1 class="h2 mb-0">{% translate 'Tasks' %}</h1>
+            <a href="{% url 'task_new' %}" class="btn btn-outline-primary">
+                {% translate 'Add new task' %}
+            </a>
         </div>
         <div class="card mb-4">
             <div class="card-body">
                 <form method="GET">
                     <div class="form-group mb-0 d-flex justify-content-between align-items-center">
                         <label class='mb-0'>
-                            <span class="mr-1">{{ task_filter.form.assigned_to.label }}</span>
+                            <span class="mr-1">
+                                {% translate task_filter.form.assigned_to.label %}
+                            </span>
                             {{ task_filter.form.assigned_to }}
                         </label>
                         <label class="mb-0">
-                            <span class="mr-1">{{ task_filter.form.status.label }}</span>
+                            <span class="mr-1">
+                                {% translate task_filter.form.status.label %}
+                            </span>
                             {{ task_filter.form.status }}
                         </label>
                         <label class="mb-0">
-                            <span class="mr-1">{{ task_filter.form.tags.label }}</span>
+                            <span class="mr-1">
+                                {% translate task_filter.form.tags.label %}
+                            </span>
                             {{ task_filter.form.tags }}
                         </label>
-                        <button class="btn btn-outline-primary">Search</button>
+                        <button class="btn btn-outline-primary">
+                            {% translate 'Search' %}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -32,30 +43,34 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <div class="d-flex d-flex align-items-center justify-content-between h5 mb-2">
-                        <div class="badge badge-secondary p-2">{{ task.status }}</div>
+                        <div class="badge badge-secondary p-2">{% translate task.status.name %}</div>
                         {% if task.tags.all|length %}
                             <div class="h6 mb-0">
                                 {% for tag in task.tags.all %}
-                                    <span class="badge badge-info">{{ tag }}</span>
+                                    <span class="badge badge-info">{% translate tag.name %}</span>
                                 {% endfor %}
                             </div>
                         {% endif %}
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <span class="mr-3">
-                            Created by <span class="font-weight-bold">{{ task.creator }}</span>
+                            {% translate 'Created by' %}
+                            <span class="font-weight-bold">{% translate task.creator.username %}</span>
                         </span>
                         <span>
-                            Assigned to <span class="font-weight-bold">{{ task.assigned_to }}</span>
+                            {% translate 'Assigned to' %}
+                            <span class="font-weight-bold">{% translate task.assigned_to.username %}</span>
                         </span>
-                        <a href="{% url 'task_edit' task.id %}" class="btn btn-outline-primary btn-sm ml-auto" role="button" aria-pressed="true">Edit</a>
+                        <a href="{% url 'task_edit' task.id %}" class="btn btn-outline-primary btn-sm ml-auto" role="button" aria-pressed="true">
+                            {% translate 'Edit' %}
+                        </a>
                     </div>
                 </div>
                 <a class="text-reset text-decoration-none" href="{% url 'task_detail' task.id %}">
                     <div class="card-body">
-                        <h2 class="card-title h4 mb-0">{{ task.name }}</h2>
+                        <h2 class="card-title h4 mb-0">{% translate task.name %}</h2>
                         {% if task.description %}
-                            <p class="card-text mt-2">{{ task.description }}</p>
+                            <p class="card-text mt-2">{% translate task.description %}</p>
                         {% endif %}
                     </div>
                 </a>

@@ -1,15 +1,26 @@
 {% extends 'task_manager/base.html' %}
+{% load i18n %}
 
 {% block content %}
+{% translate object.name as object_name %}
+
     <div class="container mt-3">
-        <h1 class="h2">Delete "{{ object }}"</h1>
+        <h1 class="h2">
+            {% blocktranslate %}Delete "{{ object_name }}"{% endblocktranslate %}
+        </h1>
         <form method="POST">
             {% csrf_token %}
-            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <p>
+                {% blocktranslate %}
+                    Are you sure you want to delete "{{ object_name }}"?
+                {% endblocktranslate %}
+            </p>
             <a class="btn btn-secondary text-white mr-2" href="{% url 'task_detail' task.id %}">
-                Cancel
+                {% translate 'Cancel' %}
             </a>
-            <button class="btn btn-danger" type="submit">Delete task</button>
+            <button class="btn btn-danger" type="submit">
+                {% translate 'Delete task' %}
+            </button>
         </form>
     </div>
 {% endblock %}

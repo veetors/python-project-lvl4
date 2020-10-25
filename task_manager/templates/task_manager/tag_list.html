@@ -1,10 +1,13 @@
 {% extends 'task_manager/base.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h2 mb-0">Tags</h1>
-            <a href="{% url 'tag_new' %}" class="btn btn-outline-primary">Add new tag</a>
+            <h1 class="h2 mb-0">{% translate 'Tags' %}</h1>
+            <a href="{% url 'tag_new' %}" class="btn btn-outline-primary">
+                {% translate 'Add new tag' %}
+            </a>
         </div>
         
         {% if object_list|length %}
@@ -12,7 +15,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">{% translate 'Name' %}</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -20,13 +23,13 @@
                     {% for tag in object_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ tag.name }}</td>
+                            <td>{% translate tag.name %}</td>
                             <td class="text-right">
                                 <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'tag_edit' tag.id %}">
-                                    Edit
+                                    {% translate 'Edit' %}
                                 </a>
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'tag_delete' tag.id %}">
-                                    Delete
+                                    {% translate 'Delete' %}
                                 </a>
                             </td>
                         </tr>

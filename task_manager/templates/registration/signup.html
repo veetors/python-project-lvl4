@@ -1,24 +1,35 @@
 {% extends 'task_manager/base.html' %}
 {% load bootstrap4 %}
+{% load i18n %}
 
 {% block content %}
+{% translate 'Enter username' as username_placeholder %}
+{% translate 'Enter email' as email_placeholder %}
+{% translate 'Enter password' as password_placeholder %}
+{% translate 'Repeat password' as repeat_password_placeholder %}
+
 <div class="container d-flex flex-column min-vh-100">
     <div class="w-50 m-auto">
         <div class="card">
             <div class="card-body p-4">
-                <h1 class="card-title h2 text-center mb-4">Create account</h1>
+                <h1 class="card-title h2 text-center mb-4">
+                    {% translate 'Create account' %}
+                </h1>
 
                 <form method="POST">
                     {% csrf_token %}
                     {% bootstrap_form_errors form type='non_fields' %}
-                    {% bootstrap_field form.username placeholder='Enter username' show_label=False show_help=False size='lg' %}
-                    {% bootstrap_field form.email placeholder='Enter email' show_label=False size='lg' %}
-                    {% bootstrap_field form.password1 placeholder='Enter password' show_label=False show_help=False size='lg' %}
-                    {% bootstrap_field form.password2 placeholder='Repeat password' show_label=False show_help=False size='lg' %}
-                    <button class="btn btn-primary btn-lg w-100 mt-4 mb-2" type=submit>Create account</button>
+                    {% bootstrap_field form.username placeholder=username_placeholder show_label=False show_help=False size='lg' %}
+                    {% bootstrap_field form.email placeholder=email_placeholder show_label=False size='lg' %}
+                    {% bootstrap_field form.password1 placeholder=password_placeholder show_label=False show_help=False size='lg' %}
+                    {% bootstrap_field form.password2 placeholder=repeat_password_placeholder show_label=False show_help=False size='lg' %}
+                    <button class="btn btn-primary btn-lg w-100 mt-4 mb-2" type=submit>
+                        {% translate 'Create account' %}
+                    </button>
                 </form>
                 <p class="mt-2">
-                    Already have an account? <a href="{% url 'login' %}">Log in</a>
+                    {% translate 'Already have an account?' %}
+                    <a href="{% url 'login' %}">{% translate 'Log in' %}</a>
                 </p>
             </div>
         </div>
