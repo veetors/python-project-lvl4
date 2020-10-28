@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -32,7 +33,7 @@ class UserCreate(SuccessMessageMixin, CreateView):
     form_class = SignupForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('login')
-    success_message = 'Account was created for %(username)s'
+    success_message = _('Account was created for %(username)s')
 
 
 class UserUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
@@ -40,7 +41,7 @@ class UserUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     template_name = 'registration/user_update_form.html'
     success_url = reverse_lazy('home')
-    success_message = 'Profile was successfully updated'
+    success_message = _('Profile was successfully updated')
 
 
 class UserPasswordUpdate(
@@ -49,7 +50,7 @@ class UserPasswordUpdate(
     auth_views.PasswordChangeView,
 ):
     template_name = 'registration/user_password_update_form.html'
-    success_message = 'Password was successfully updated'
+    success_message = _('Password was successfully updated')
 
     def get_success_url(self):
         return reverse_lazy('user_edit', args=(self.request.user.id,))
@@ -75,7 +76,7 @@ class TaskCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     form_class = TaskCreationForm
     template_name_suffix = '_create_form'
     success_url = reverse_lazy('task_list')
-    success_message = 'Task "%(name)s" was successfully created'
+    success_message = _('Task "%(name)s" was successfully created')
 
     def get_initial(self):
         user = self.request.user
@@ -89,7 +90,7 @@ class TaskUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name_suffix = '_update_form'
-    success_message = 'Task "%(name)s" was successfully updated'
+    success_message = _('Task "%(name)s" was successfully updated')
 
     def get_success_url(self):
         return reverse_lazy('task_detail', args=(self.object.id,))
@@ -98,7 +99,7 @@ class TaskUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 class TaskDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('task_list')
-    success_message = 'Task deleted successfully'
+    success_message = _('Task deleted successfully')
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, self.success_message)
@@ -123,7 +124,7 @@ class TagCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     fields = ['name']
     template_name_suffix = '_create_form'
     success_url = reverse_lazy('tag_list')
-    success_message = 'Tag "%(name)s" was successfully created'
+    success_message = _('Tag "%(name)s" was successfully created')
 
 
 class TagUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
@@ -131,13 +132,13 @@ class TagUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     fields = ['name']
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('tag_list')
-    success_message = 'Name "%(name)s" was successfully updated'
+    success_message = _('Name "%(name)s" was successfully updated')
 
 
 class TagDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Tag
     success_url = reverse_lazy('tag_list')
-    success_message = 'Tag deleted successfully'
+    success_message = _('Tag deleted successfully')
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, self.success_message)

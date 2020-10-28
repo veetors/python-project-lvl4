@@ -1,3 +1,4 @@
+from django.utils.translation import gettext as _
 from django_filters import FilterSet
 from task_manager.models import Task
 
@@ -11,7 +12,7 @@ class TaskFilter(FilterSet):
                 'class': 'selectpicker',
             })
             if filter != 'tags':
-                filter_field.empty_label = 'Nothing selected'
+                filter_field.empty_label = _('Nothing selected')
 
     @property
     def qs(self):
