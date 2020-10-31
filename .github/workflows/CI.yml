@@ -30,3 +30,4 @@ jobs:
         make test
       env:
         DB_ENGINE: SQLite
+        SECRET_KEY: secret
