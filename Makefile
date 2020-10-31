@@ -13,6 +13,12 @@ test:
 test_detail:
 	@poetry run python manage.py test --verbosity 2
 
+test_coverage:
+	@poetry run coverage run --source='.' manage.py test
+
+test-coverage-report-xml:
+	@poetry run coverage xml
+
 selfcheck:
 	@poetry check
 

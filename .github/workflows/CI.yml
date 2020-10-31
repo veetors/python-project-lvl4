@@ -27,7 +27,13 @@ jobs:
         make lint
     - name: Test
       run: |
-        make test
+        make test_coverage
       env:
         DB_ENGINE: SQLite
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+    - name: Publish code coverage report
+      uses: paambaati/codeclimate-action@v2.6.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+        coverageCommand: make test-coverage-report-xml
