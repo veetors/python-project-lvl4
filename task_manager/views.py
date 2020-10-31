@@ -56,6 +56,37 @@ class UserPasswordUpdate(
         return reverse_lazy('user_edit', args=(self.request.user.id,))
 
 
+# Tags
+class TagList(LoginRequiredMixin, ListView):
+    model = Tag
+
+
+class TagCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Tag
+    fields = ['name']
+    template_name_suffix = '_create_form'
+    success_url = reverse_lazy('tag_list')
+    success_message = _('Tag "%(name)s" was successfully created')
+
+
+class TagUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Tag
+    fields = ['name']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('tag_list')
+    success_message = _('Name "%(name)s" was successfully updated')
+
+
+class TagDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    model = Tag
+    success_url = reverse_lazy('tag_list')
+    success_message = _('Tag deleted successfully')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, self.success_message)
+        return super().delete(request, *args, **kwargs)
+
+
 # Tasks
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -112,34 +143,3 @@ class UserTaskList(TaskList):
         task_filter = UserTaskFilter(self.request.user, self.request.GET)
         context['task_filter'] = task_filter
         return context
-
-
-# Tags
-class TagList(LoginRequiredMixin, ListView):
-    model = Tag
-
-
-class TagCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    model = Tag
-    fields = ['name']
-    template_name_suffix = '_create_form'
-    success_url = reverse_lazy('tag_list')
-    success_message = _('Tag "%(name)s" was successfully created')
-
-
-class TagUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    model = Tag
-    fields = ['name']
-    template_name_suffix = '_update_form'
-    success_url = reverse_lazy('tag_list')
-    success_message = _('Name "%(name)s" was successfully updated')
-
-
-class TagDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
-    model = Tag
-    success_url = reverse_lazy('tag_list')
-    success_message = _('Tag deleted successfully')
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(request, self.success_message)
-        return super().delete(request, *args, **kwargs)

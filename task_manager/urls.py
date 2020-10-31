@@ -34,6 +34,11 @@ urlpatterns = [
         name='user_password_edit',
     ),
 
+    path('tags/', views.TagList.as_view(), name='tag_list'),
+    path('tags/new/', views.TagCreate.as_view(), name='tag_new'),
+    path('tags/<int:pk>/edit/', views.TagUpdate.as_view(), name='tag_edit'),
+    path('tags/<int:pk>/delete/', views.TagDelete.as_view(), name='tag_delete'),
+
     path('tasks/', views.TaskList.as_view(), name='task_list'),
     path('tasks/new/', views.TaskCreate.as_view(), name='task_new'),
     path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
@@ -48,11 +53,6 @@ urlpatterns = [
         name='task_delete',
     ),
     path('tasks/my/', views.UserTaskList.as_view(), name='user_task_list'),
-
-    path('tags/', views.TagList.as_view(), name='tag_list'),
-    path('tags/new/', views.TagCreate.as_view(), name='tag_new'),
-    path('tags/<int:pk>/edit/', views.TagUpdate.as_view(), name='tag_edit'),
-    path('tags/<int:pk>/delete/', views.TagDelete.as_view(), name='tag_delete'),
 
     path('admin/', admin.site.urls),
 ]
