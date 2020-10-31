@@ -7,11 +7,11 @@ start:
 lint:
 	@poetry run flake8 task_manager
 
-ptw:
-	@poetry run ptw
-
 test:
-	@poetry run pytest --cov=page_loader --cov-report xml tests/
+	@poetry run python manage.py test
+
+test_detail:
+	@poetry run python manage.py test --verbosity 2
 
 selfcheck:
 	@poetry check
