@@ -2,6 +2,7 @@
 .idea/
 .vscode/
 dist/
+staticfiles/
 __pycache__/
 
 .env
