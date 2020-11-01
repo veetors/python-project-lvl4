@@ -25,6 +25,8 @@ jobs:
     - name: Collect static
       run: |
         poetry run python manage.py collectstatic
+      env:
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     - name: Lint with flake8
       run: |
         make lint
