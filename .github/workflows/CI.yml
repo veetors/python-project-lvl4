@@ -29,6 +29,7 @@ jobs:
       run: |
         make test_coverage
       env:
+        DEBUG: ${{ secrets.DEBUG }}
         DB_ENGINE: SQLite
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     - name: Publish code coverage report
